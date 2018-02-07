@@ -9,8 +9,8 @@ import (
 )
 
 // GetChampions is used to retrieve static data regarding champions (title, id)
-func (leagueClient *LeagueClient) GetChampions() model.Champions {
-	req, err := leagueClient.makeRequest("champions", nil)
+func (leagueClient *LeagueClient) GetChampions(values url.Values) model.Champions {
+	req, err := leagueClient.makeRequest("champions", values)
 	if err != nil {
 		log.Printf("Failed to create request: %s\n", err)
 	}
@@ -50,4 +50,25 @@ func (leagueClient *LeagueClient) GetChampion(id int64, values url.Values) model
 	}
 
 	return champion
+}
+
+func (leagueClient *LeagueClient) GetItems(values url.Values) model.Items {
+	req, err := leagueClient.makeRequest(fmt.Sprintf("%s", "items"), values)
+	if err != nil {
+		log.Printf("Failed to create request: %s\n", err)
+	}
+
+	res, err := leagueClient.Client.Do(req)
+	if err != nil {
+		log.Printf("Failed to get response: %s\n", err)
+	}
+	defer res.Body.Close()
+
+	var items model.Items
+	err = unmarshalResponse(res, &items)
+	if err != nil {
+		log.Printf("%s", err)
+	}
+
+	return items
 }

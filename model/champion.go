@@ -1,7 +1,9 @@
 package model
 
 type Champions struct {
-	Data map[string]Champion `json:"data"`
+	Data    map[string]Champion `json:"data"`
+	Type    string              `json:"type"`
+	Version string              `json:"version"`
 }
 
 type Champion struct {
@@ -32,35 +34,25 @@ type Info struct {
 
 type Stats struct {
 	ArmorPerLevel        float64 `json:"armorperlevel,omitempty"`
-	HpPerLevel           float64 `json:"hpperlevel,omitempty"`
+	HPPerLevel           float64 `json:"hpperlevel,omitempty"`
 	AttackDamage         float64 `json:"attackdamage,omitempty"`
-	MpPerLevel           float64 `json:"mpperlevel,omitempty"`
+	MPPerLevel           float64 `json:"mpperlevel,omitempty"`
 	AttackSpeedOffset    float64 `json:"attackspeedoffset,omitempty"`
 	Armor                float64 `json:"armor,omitempty"`
-	Hp                   float64 `json:"hp,omitempty"`
-	HpRegenPerLevel      float64 `json:"hpregendperlevel,omitempty"`
+	HP                   float64 `json:"hp,omitempty"`
+	HPRegenPerLevel      float64 `json:"hpregendperlevel,omitempty"`
 	Spellblock           float64 `json:"spellblock,omitempty"`
 	AttackRange          float64 `json:"attackrange,omitempty"`
 	Movespeed            float64 `json:"movespeed,omitempty"`
 	AttackDamagePerLevel float64 `json:"attackdamageperlevel,omitempty"`
-	MpRegenPerLevel      float64 `json:"mpregenperlevel,omitempty"`
-	Mp                   float64 `json:"mp,omitempty"`
+	MPRegenPerLevel      float64 `json:"mpregenperlevel,omitempty"`
+	MP                   float64 `json:"mp,omitempty"`
 	SpellblockPerLevel   float64 `json:"spellblockperlevel,omitempty"`
 	Crit                 float64 `json:"crit,omitempty"`
-	MpRegen              float64 `json:"mpregen,omitempty"`
+	MPRegen              float64 `json:"mpregen,omitempty"`
 	AttackSpeedPerLevel  float64 `json:"attackspeedperlevel,omitempty"`
-	HpRegen              float64 `json:"hpregen,omitempty"`
+	HPRegen              float64 `json:"hpregen,omitempty"`
 	CritPerLevel         float64 `json:"critperlevel,omitempty"`
-}
-
-type Image struct {
-	Full   string `json:"full,omitempty"`
-	Group  string `json:"group,omitempty"`
-	Sprite string `json:"sprite,omitempty"`
-	H      int    `json:"h,omitempty"`
-	W      int    `json:"w,omitempty"`
-	Y      int    `json:"y,omitempty"`
-	X      int    `json:"x,omitempty"`
 }
 
 type Skin struct {
