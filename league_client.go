@@ -3,8 +3,7 @@ package leaguelib
 import (
 	"log"
 	"net/http"
-
-	"github.com/zachvanuum/league-lib/model"
+	"net/url"
 )
 
 //TODO: Remove log statements!
@@ -28,8 +27,8 @@ func NewLeagueClient(apiKey string, region string) *LeagueClient {
 	return leagueClient
 }
 
-func (leagueClient *LeagueClient) makeRequest(endpoint string) (*http.Request, error) {
-	url := formatRequestURL(leagueClient.Region, leagueClient.APIVersion, endpoint, nil)
+func (leagueClient *LeagueClient) makeRequest(endpoint string, values url.Values) (*http.Request, error) {
+	url := formatRequestURL(leagueClient.Region, "static-data", leagueClient.APIVersion, endpoint, values)
 	query := url.Query()
 	query.Add("api_key", leagueClient.APIKey)
 	url.RawQuery = query.Encode()
@@ -37,25 +36,4 @@ func (leagueClient *LeagueClient) makeRequest(endpoint string) (*http.Request, e
 	log.Printf("Creating request to: %s\n", url)
 
 	return http.NewRequest("GET", url.String(), nil)
-}
-
-func (leagueClient *LeagueClient) GetChampions() model.Champions {
-	req, err := leagueClient.makeRequest("champions")
-	if err != nil {
-		log.Printf("Failed to create request: %s\n", err)
-	}
-
-	res, err := leagueClient.Client.Do(req)
-	if err != nil {
-		log.Printf("Failed to get response: %s\n", err)
-	}
-	defer res.Body.Close()
-
-	var champions model.Champions
-	err = unmarshalResponse(res, &champions)
-	if err != nil {
-		log.Printf("%s", err)
-	}
-
-	return champions
 }

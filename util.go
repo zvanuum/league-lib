@@ -39,12 +39,12 @@ func unmarshalResponse(res *http.Response, target interface{}) error {
 	return fmt.Errorf("Failed to read response body: %s", err)
 }
 
-func formatRequestURL(region string, version int, endpoint string, query url.Values) url.URL {
+func formatRequestURL(region string, api string, version int, endpoint string, query url.Values) url.URL {
 	var requestURL url.URL
 
 	requestURL.Scheme = "https"
 	requestURL.Host = getHostByRegion(region)
-	requestURL.Path = fmt.Sprintf("/lol/static-data/v%d/%s", version, endpoint)
+	requestURL.Path = fmt.Sprintf("/lol/%s/v%d/%s", api, version, endpoint)
 	requestURL.RawQuery = query.Encode()
 
 	return requestURL
