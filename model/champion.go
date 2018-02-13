@@ -1,9 +1,8 @@
 package model
 
 type Champions struct {
-	Data    map[string]Champion `json:"data"`
-	Type    string              `json:"type"`
-	Version string              `json:"version"`
+	Data map[string]Champion `json:"data"`
+	*VersionedData
 }
 
 type Champion struct {

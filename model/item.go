@@ -1,11 +1,10 @@
 package model
 
 type Items struct {
-	Data    map[string]Item `json:"data"`
-	Type    string          `json:"type"`
-	Version string          `json:"version"`
-	Tree    []ItemTree      `json:"tree,omitempty"`
-	Groups  []Group         `json:"groups,omitempty"`
+	Data map[string]Item `json:"data"`
+	*VersionedData
+	Tree   []ItemTree `json:"tree,omitempty"`
+	Groups []Group    `json:"groups,omitempty"`
 }
 
 type Item struct {
